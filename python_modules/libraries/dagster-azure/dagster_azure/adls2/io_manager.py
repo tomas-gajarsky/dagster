@@ -1,3 +1,4 @@
+import os
 import pickle
 from contextlib import contextmanager
 from typing import Any, Iterator, Union
@@ -21,7 +22,7 @@ from upath import UPath
 from dagster_azure.adls2.resources import ADLS2Resource
 from dagster_azure.adls2.utils import ResourceNotFoundError
 
-_LEASE_DURATION = 60  # One minute
+_LEASE_DURATION = int(os.getenv("AZURE_IO_MANAGER_LEASE_DURATION", 60))
 
 
 class PickledObjectADLS2IOManager(UPathIOManager):
